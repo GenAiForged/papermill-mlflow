@@ -1,7 +1,12 @@
-venv/
-.DS_Store
-.idea
-artifact_dir
-notebooks/mlruns
-notebooks/.ipynb_checkpoints
+# Ignore the data directory
+data/
+
+# Ignore Python cache files
+__pycache__/
 *.pyc
+
+# Ignore TensorFlow log files
+/logs/
+
+# Ignore the saved model
+/model/mnist_model.h5

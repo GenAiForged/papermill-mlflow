@@ -1,56 +1,61 @@
-# papermill-mlflow
-Simple data science experimentation with `jupyter`, `papermill`, and `mlflow`
+# Handwritten Digit Recognition
 
-#### Associated blog post: [A simpler experimentation workflow with Jupyter, Papermill, and MLflow](https://eugeneyan.com/writing/experimentation-workflow-with-jupyter-papermill-mlflow/)
----
+This project is a web application that can recognize handwritten digits. It uses a convolutional neural network (CNN) trained on the MNIST dataset to make predictions. The web interface is built with Flask and allows users to draw a digit on a canvas and get a prediction from the model.
 
-# Quick-start
+## Project Structure
 
-- Clone this repo
+-   `model/`: Contains the model training script.
+    -   `train_model.py`: Script to train the CNN model and save it.
+-   `webapp/`: Contains the Flask web application.
+    -   `app.py`: The main Flask application file.
+    -   `templates/`: Contains the HTML templates.
+    -   `static/`: Contains the CSS and JavaScript files.
+-   `requirements.txt`: A list of the Python dependencies.
+-   `.gitignore`: Specifies which files and directories to ignore in version control.
 
-```
-git clone git@github.com:eugeneyan/papermill-mlflow.git
-```
-- Set up virtualenv
+## Setup and Installation
 
-```
-cd papermill-mlflow
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd <repository-directory>
+    ```
 
-# Create virtualenv based on requirements.txt
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+2.  **Create and activate a virtual environment (optional but recommended):**
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    ```
 
-# Install kernelspec for Jupyter notebooks (the name argument must be identical)
-python -m ipykernel install --user --name=papermill-mlflow
-```
+3.  **Install the dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    pip install tensorflow opencv-python Flask
+    ```
 
-- Start Jupyter notebook
+## Training the Model
 
-```
-cd notebooks
-jupyter notebook
-```
+To train the model, run the following command from the root directory of the project:
 
-- Run the cells in `runner.ipynb`
-
-![image of runner notebook](https://raw.githubusercontent.com/eugeneyan/papermill-mlflow/master/assets/runner.png)
-
-- Start MLflow (in another terminal)
-
-```
-# Open another terminal
-
-# Activate the virtualenv
-cd papermill-mlflow
-source venv/bin/activate
-
-# Start the mlflow server
-cd notebooks
-mlflow server
+```bash
+python model/train_model.py
 ```
 
-- Access the MLflow UI opening this in a browser: [http://127.0.0.1:5000](http://127.0.0.1:5000/#/experiments/1)
-	- Navigate to "indices" in the experiment tab if necessary
+This will train the CNN on the MNIST dataset and save the trained model as `model/mnist_model.h5`.
 
-![image of mlflow](https://raw.githubusercontent.com/eugeneyan/papermill-mlflow/master/assets/mlflow.png)
+## Running the Web Application
+
+To run the Flask web application, execute the following command from the root directory:
+
+```bash
+python webapp/app.py
+```
+
+The application will be available at `http://127.0.0.1:5000`.
+
+## How to Use the Web Interface
+
+1.  Open your web browser and navigate to `http://127.0.0.1:5000`.
+2.  Draw a single digit on the canvas with your mouse.
+3.  Click the "Predict" button to get the model's prediction.
+4.  Click the "Clear" button to clear the canvas and draw a new digit.
